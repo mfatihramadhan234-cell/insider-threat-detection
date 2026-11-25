@@ -1,0 +1,110 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Aktivitas - Insider Threat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body { background: #f3f6fb; }
+        .sidebar { min-height: 100vh; background: #14213d; }
+        .sidebar a {
+            display: block;
+            padding: 13px 18px;
+            color: #cbd5e1;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        .sidebar a:hover, .sidebar a.active {
+            background: #263b63;
+            color: white;
+        }
+        .card { border: none; border-radius: 12px; }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid">
+<div class="row">
+
+    <div class="col-md-2 sidebar p-3">
+        <h5 class="text-white mb-4">🛡️ Insider Threat</h5>
+        <a href="/">Dashboard</a>
+        <a href="/aktivitas" class="active">Data Aktivitas</a>
+        <a href="/deteksi">Deteksi Anomali</a>
+        <a href="/hasil">Hasil Deteksi</a>
+    </div>
+
+    <div class="col-md-10 p-4">
+
+        <h3>Data Aktivitas Pengguna</h3>
+        <p class="text-muted">Monitoring aktivitas login dan perangkat pengguna.</p>
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-white">
+                <h5>Logon Activity</h5>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>User ID</th>
+                            <th>Komputer</th>
+                            <th>Aktivitas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in logon %}
+                        <tr>
+                            <td>{{ row.event_date }}</td>
+                            <td>{{ row.user_id }}</td>
+                            <td>{{ row.pc }}</td>
+                            <td>{{ row.activity }}</td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="4">Data belum tersedia.</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-header bg-white">
+                <h5>Device Activity</h5>
+            </div>
+            <div class="card-body table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Waktu</th>
+                            <th>User ID</th>
+                            <th>Komputer</th>
+                            <th>Aktivitas</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for row in device %}
+                        <tr>
+                            <td>{{ row.event_date }}</td>
+                            <td>{{ row.user_id }}</td>
+                            <td>{{ row.pc }}</td>
+                            <td>{{ row.activity }}</td>
+                        </tr>
+                    {% else %}
+                        <tr><td colspan="4">Data belum tersedia.</td></tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+</div>
+</body>
+</html>
